@@ -30,6 +30,8 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+          # 서브폴더로 배포하려면 아래 주석 해제
+          # destination: clickergame
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
