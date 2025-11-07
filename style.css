@@ -1,0 +1,352 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.game-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.info-panel {
+    width: 350px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.info-panel h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.target-color-display {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.color-box {
+    width: 100px;
+    height: 100px;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#targetColorName {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.instructions {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.stage-info {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stage-display {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #FFD700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.stage-progress {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.click-area {
+    flex: 1;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.stage-complete {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.stage-complete.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.game-over {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.game-over.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.game-over h2 {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.game-over p {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+.stage-complete h2 {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.stage-complete p {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+#nextStageBtn,
+#restartBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#nextStageBtn:hover,
+#restartBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+#nextStageBtn:active,
+#restartBtn:active {
+    transform: translateY(0);
+}
+
+.color-selector-section {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.color-selector-section h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.color-picker-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#colorPicker {
+    width: 80px;
+    height: 80px;
+    border: 3px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    background: none;
+}
+
+.color-picker-label {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.quick-colors {
+    margin-bottom: 15px;
+}
+
+.quick-colors p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.color-btn {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.set-target-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.set-target-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.set-target-btn:active {
+    transform: translateY(0);
+}
+
+.success-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.success-indicator.show {
+    display: flex;
+    animation: pulse 0.5s ease;
+}
+
+.success-color-box {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    border: 5px solid white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: glow 1s ease infinite;
+}
+
+.success-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+    }
+    
+    .info-panel {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+    
+    .click-area {
+        height: calc(100vh - 300px);
+    }
+}
